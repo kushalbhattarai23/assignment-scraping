@@ -94,6 +94,7 @@ D:Assignment
 ### Output
 
 - The `weddingspots-data.csv` file will contain the following data for each wedding venue:
+    - Url
     - Venue Name
     - Phone Number
     - Venue Highlights
