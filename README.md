@@ -53,7 +53,7 @@ Before setting up the project, ensure you have the following installed:
 The project is structured as follows:
 
 ```
-D:ssignment
+D:Assignment
 │
 └───assignment-scraping
     └───scraping
@@ -80,7 +80,7 @@ D:ssignment
 1. **Navigate to the project directory**:
 
    ```bash
-   cd D:ssignmentssignment-scraping
+   cd assignment-scraping
    ```
 
 2. **Run the spider** to start scraping wedding spots:
@@ -100,6 +100,3 @@ D:ssignment
     - Guest Capacity
     - Address
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
