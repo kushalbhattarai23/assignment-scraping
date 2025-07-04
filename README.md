@@ -1,105 +1,91 @@
-
 # Scrapy Wedding Spots Scraping Project
 
-This repository contains a Scrapy project to scrape wedding venue data from the [Wedding Spot](https://www.wedding-spot.com). The data includes venue names, contact details, highlights, and guest capacities.
+This project is a Scrapy-based web scraper that extracts wedding venue data from the Wedding Spot website ([https://www.wedding-spot.com](https://www.wedding-spot.com)).
+
+## Features
+
+*   Scrapes listings from Wedding Spot by region and paginated results.
+*   Visits each venue's individual page to extract full details.
+*   Captures:
+    *   Venue Name
+    *   Phone Number
+    *   Highlights
+    *   Guest Capacity
+    *   Address
+    *   URL of the venue
+*   Sends the extracted data to a Google Spreadsheet in real-time.
 
 ## Project Setup
 
-### Prerequisites
+1.  **Prerequisites:**
+    *   Python 3.8 or later
+    *   Anaconda or Miniconda (recommended)
+    *   Git
 
-Before setting up the project, ensure you have the following installed:
+2.  **Setup:**
+    ```bash
+    git clone <repository_url>
+    cd assignment-scraping
+    conda create --name assignment python=3.8
+    conda activate assignment
+    pip install -r requirements.txt
+	```
 
-- **Anaconda** (or Miniconda)
-- **Python 3.8+** (or another compatible version)
-- **Scrapy** for web scraping
+## Google Sheets Integration
 
-### Setting Up the Conda Environment
+To use Google Sheets as the output destination:
 
-1. **Clone this repository** (or download it as a zip file):
-   
+1. Visit Google Cloud Console: https://console.cloud.google.com/
+2. Create a new project or use an existing one.
+3. Enable both the following APIs:
+   - Google Sheets API
+   - Google Drive API
+4. Create a service account under **Credentials**.
+5. Generate and download the JSON key file.
+6. Rename the downloaded file to `credentials.json` and place it inside the `assignment-scraping` folder.
+7. Open your target Google Sheet in a browser.
+8. Share the sheet with the service account email (usually ends with `@project-id.iam.gserviceaccount.com`) and assign **Editor** permission.
+
+> **Important:** Make sure `credentials.json` is included in your `.gitignore` file to prevent uploading sensitive credentials to GitHub.
+
+## Google Sheet Details
+
+- The project expects the Google Sheet to be named exactly:  
+  **WeddingVenuesData**
+
+- The spider writes data to the first sheet (**Sheet1**) of this Google Sheet.
+
+- To use a different sheet name, update the sheet name in the pipeline code accordingly.
+
+## Project Structure
+
+```
+assignment-scraping/
+├── scraping/
+│   ├── spiders/
+│   │   └── weddingspots.py          -> Main spider script
+│   ├── items.py                     -> (optional) Defines Scrapy Items
+│   ├── middlewares.py               -> (optional) Custom middlewares
+│   ├── pipelines.py                 -> Pipeline that sends data to Google Sheets
+│   ├── settings.py                  -> Project configuration
+│   └── __pycache__/                 -> Compiled bytecode
+├── .gitignore                      -> Should include credentials.json and other ignored files
+├── credentials.json                -> Google API service account key (do not commit)
+├── requirements.txt                -> List of all required Python packages
+├── scrapy.cfg                      -> Scrapy project file
+└── weddingspots-data.csv           -> Local optional CSV export (can be added in pipeline)
+```
+
+## Running the Spider
+
+1. Open your terminal or Anaconda prompt.
+2. Navigate to the project directory:  
    ```bash
-   git clone <repository_url>
    cd assignment-scraping
    ```
-
-2. **Create a Conda environment** from the `environment.yml` (if provided) or manually create a Conda environment:
-
-   ```bash
-   conda create --name assignment python=3.8
-   ```
-
-3. **Activate the Conda environment**:
-
-   ```bash
-   conda activate assignment
-   ```
-
-4. **Install project dependencies**:
-   
-   If you have a `requirements.txt` file in the repository (you do, as per your directory structure), install the required Python packages using:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-   Alternatively, if you prefer to use Conda packages, you can install Scrapy manually within the environment:
-
-   ```bash
-   conda install -c conda-forge scrapy
-   ```
-
-### Project Structure
-
-The project is structured as follows:
-
-```
-D:ssignment
-│
-└───assignment-scraping
-    └───scraping
-        ├───spiders
-        ├───__pycache__
-        ├───items.py
-        ├───middlewares.py
-        ├───pipelines.py
-        ├───settings.py
-        └───weddingspots.py
-    ├───requirements.txt
-    ├───scrapy.cfg
-    └───weddingspots-data.csv
-```
-
-- `scraping/spiders/weddingspots.py`: The main spider that scrapes the wedding venue data.
-- `scraping/items.py`: Defines the structure of the scraped data.
-- `scraping/middlewares.py`: Custom middleware (if used).
-- `scraping/pipelines.py`: Data processing pipelines (optional).
-- `scraping/settings.py`: Configuration settings for Scrapy.
-
-### Running the Spider
-
-1. **Navigate to the project directory**:
-
-   ```bash
-   cd D:ssignmentssignment-scraping
-   ```
-
-2. **Run the spider** to start scraping wedding spots:
-
+3. Run the spider:  
    ```bash
    scrapy crawl weddingspots
    ```
 
-   This will begin scraping the wedding venue details and save the data to a CSV file (`weddingspots-data.csv`).
-
-### Output
-
-- The `weddingspots-data.csv` file will contain the following data for each wedding venue:
-    - Venue Name
-    - Phone Number
-    - Venue Highlights
-    - Guest Capacity
-    - Address
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
