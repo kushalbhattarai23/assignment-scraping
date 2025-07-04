@@ -53,7 +53,7 @@ Before setting up the project, ensure you have the following installed:
 The project is structured as follows:
 
 ```
-D:Assignment
+D:ssignment
 │
 └───assignment-scraping
     └───scraping
@@ -80,7 +80,7 @@ D:Assignment
 1. **Navigate to the project directory**:
 
    ```bash
-   cd assignment-scraping
+   cd D:ssignmentssignment-scraping
    ```
 
 2. **Run the spider** to start scraping wedding spots:
@@ -94,10 +94,12 @@ D:Assignment
 ### Output
 
 - The `weddingspots-data.csv` file will contain the following data for each wedding venue:
-    - Url
     - Venue Name
     - Phone Number
     - Venue Highlights
     - Guest Capacity
     - Address
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

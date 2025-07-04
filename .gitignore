@@ -1,0 +1,38 @@
+# Ignore credentials
+credentials.json
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+# Virtual environment
+venv/
+.env/
+.env.bak/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Scrapy logs and cache
+.scrapy
+*.log
+
+# VSCode config
+.vscode/
+
+# Mac and Windows system files
+.DS_Store
+Thumbs.db
+
+# Pytest cache
+.pytest_cache/
+
+# Output directories
+output/
+build/
+dist/
+
+# pip cache
+pip-wheel-metadata/

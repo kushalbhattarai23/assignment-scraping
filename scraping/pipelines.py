@@ -1,13 +1,31 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
+class GoogleSheetsPipeline:
+    def open_spider(self, spider):
+        # Define the scope
+        scope = ["https://spreadsheets.google.com/feeds",
+                 "https://www.googleapis.com/auth/spreadsheets",
+                 "https://www.googleapis.com/auth/drive.file",
+                 "https://www.googleapis.com/auth/drive"]
 
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+        creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+        client = gspread.authorize(creds)
 
+        # Open the sheet
+        self.sheet = client.open("WeddingVenuesData").sheet1  # Replace with your actual sheet name
 
-class ScrapingPipeline:
+        # Write headers only once
+        self.sheet.append_row(['Url', 'Venue Name', 'Phone', 'Venue Highlights', 'Guest Capacity', 'Address'])
+
     def process_item(self, item, spider):
+        # Append the item to the sheet
+        self.sheet.append_row([
+            item['Url'],
+            item['Venue Name'],
+            item['Phone'],
+            item['Venue Highlights'],
+            item['Guest Capacity'],
+            item['Address']
+        ])
         return item

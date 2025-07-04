@@ -9,7 +9,7 @@ class WeddingspotsSpider(scrapy.Spider):
     allowed_domains = ['wedding-spot.com']
     start_urls = ['https://www.wedding-spot.com/wedding-venues/?pr=new%20jersey&r=new%20jersey%3anorth%20jersey&r=new%20jersey%3aatlantic%20city&r=new%20jersey%3ajersey%20shore&r=new%20jersey%3asouth%20jersey&r=new%20jersey%3acentral%20jersey&r=new%20york%3along%20island&r=new%20york%3amanhattan&r=new%20york%3abrooklyn&r=pennsylvania%3aphiladelphia&sr=1']
     count = 0  # Counter to track the number of URLs extracted
-    max_count = 180 # Maximum number of URLs to extract
+    max_count = 108 # Maximum number of URLs to extract
     current_page = 1  # Starting page for pagination
 
     def parse(self, response: Response):
